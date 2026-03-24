@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Music2 } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import logo from '@/assets/logo.png';
 import { getSongBySlug } from '@/config/songs';
 import { useMultiTrackPlayer } from '@/hooks/useMultiTrackPlayer';
 import { Mixer } from '@/components/Mixer';
@@ -54,9 +55,7 @@ function SongPlayer({ song }: { song: NonNullable<ReturnType<typeof getSongBySlu
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <div className="flex items-center gap-3 flex-1 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-foreground text-background flex items-center justify-center flex-shrink-0">
-              <Music2 className="w-4 h-4" />
-            </div>
+            <img src={logo} alt="ICNV Sessions" className="w-8 h-8 rounded-lg object-cover flex-shrink-0" />
             <div className="min-w-0">
               <h1 className="text-base font-semibold text-foreground truncate tracking-tight">
                 {song.name}
