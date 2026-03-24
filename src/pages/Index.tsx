@@ -11,7 +11,7 @@ const Index = () => {
             <img src={logo} alt="ICNV Sessions" className="w-10 h-10 rounded-xl object-cover" />
             <div>
               <h1 className="text-lg font-semibold text-foreground tracking-tight">ICNV Sessions</h1>
-              <p className="text-xs text-muted-foreground">Move ainda hoje</p>
+              <p className="text-xs text-muted-foreground">Ele move ainda hoje</p>
             </div>
           </div>
         </div>
