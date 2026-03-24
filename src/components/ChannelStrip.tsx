@@ -38,7 +38,7 @@ export function ChannelStrip({
       <div className="min-w-[120px]">
         <span className="text-sm font-medium text-foreground">{channel.name}</span>
         {!channel.loaded && (
-          <span className="block text-xs text-muted-foreground">Loading...</span>
+          <span className="block text-xs text-muted-foreground">Carregando...</span>
         )}
       </div>
 

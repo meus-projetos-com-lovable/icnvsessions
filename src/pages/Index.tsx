@@ -19,8 +19,8 @@ const Index = () => {
 
       <main className="max-w-2xl mx-auto px-6 py-8">
         <div className="mb-6">
-          <h2 className="text-sm font-semibold text-foreground mb-1">Songs</h2>
-          <p className="text-xs text-muted-foreground">Select a song to open the mixer</p>
+          <h2 className="text-sm font-semibold text-foreground mb-1">Músicas</h2>
+          <p className="text-xs text-muted-foreground">Selecione uma música para abrir o mixer</p>
         </div>
         <TrackList songs={songs} />
       </main>

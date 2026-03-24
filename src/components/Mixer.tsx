@@ -12,7 +12,7 @@ export function Mixer({ channels, onVolumeChange, onToggleMute, onToggleSolo }: 
   if (channels.length === 0) {
     return (
       <div className="text-center py-12 text-muted-foreground">
-        No channels available
+        Nenhum canal disponível
       </div>
     );
   }
@@ -22,7 +22,7 @@ export function Mixer({ channels, onVolumeChange, onToggleMute, onToggleSolo }: 
       <div className="flex items-center justify-between px-1 mb-3">
         <h2 className="text-sm font-semibold text-foreground tracking-tight">Mixer</h2>
         <span className="font-mono-ui text-xs text-muted-foreground">
-          {channels.length} channels
+          {channels.length} canais
         </span>
       </div>
       <div className="space-y-1.5">
