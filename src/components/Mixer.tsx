@@ -12,7 +12,7 @@ export function Mixer({ channels, onVolumeChange, onToggleMute, onToggleSolo }: 
   if (channels.length === 0) {
     return (
       <div className="text-center py-12 text-muted-foreground">
-        No channels available
+        Nenhum canal disponível
       </div>
     );
   }
