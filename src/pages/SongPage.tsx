@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Music2 } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import logo from '@/assets/logo.png';
 import { getSongBySlug } from '@/config/songs';
 import { useMultiTrackPlayer } from '@/hooks/useMultiTrackPlayer';
 import { Mixer } from '@/components/Mixer';
