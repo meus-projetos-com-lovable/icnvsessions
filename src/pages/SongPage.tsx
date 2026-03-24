@@ -61,7 +61,7 @@ function SongPlayer({ song }: { song: NonNullable<ReturnType<typeof getSongBySlu
                 {song.name}
               </h1>
               {isLoading && (
-                <p className="text-xs text-muted-foreground">Loading audio...</p>
+                <p className="text-xs text-muted-foreground">Carregando áudio...</p>
               )}
             </div>
           </div>
