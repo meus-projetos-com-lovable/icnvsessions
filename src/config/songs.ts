@@ -10,41 +10,64 @@ export interface SongConfig {
   channels: ChannelConfig[];
 }
 
-// Configure your songs here. Each song maps to a folder in /public/musicas/
-// To add a new song: create the folder structure and add an entry here.
-export const songs: SongConfig[] = [
-  {
-    name: "Way Maker",
-    slug: "way-maker",
-    channels: [
-      { name: "Vocals", path: "/musicas/Way Maker/Vocals/audio.mp3", type: "vocal" },
-      { name: "Piano", path: "/musicas/Way Maker/Piano/audio.mp3", type: "keys" },
-      { name: "Guitar", path: "/musicas/Way Maker/Guitar/audio.mp3", type: "guitar" },
-      { name: "Drums", path: "/musicas/Way Maker/Drums/audio.mp3", type: "drums" },
-      { name: "Bass", path: "/musicas/Way Maker/Bass/audio.mp3", type: "bass" },
-    ],
-  },
-  {
-    name: "Goodness of God",
-    slug: "goodness-of-god",
-    channels: [
-      { name: "Vocals", path: "/musicas/Goodness of God/Vocals/audio.mp3", type: "vocal" },
-      { name: "Keys", path: "/musicas/Goodness of God/Keys/audio.mp3", type: "keys" },
-      { name: "Acoustic Guitar", path: "/musicas/Goodness of God/Acoustic Guitar/audio.mp3", type: "guitar" },
-      { name: "Drums", path: "/musicas/Goodness of God/Drums/audio.mp3", type: "drums" },
-    ],
-  },
-  {
-    name: "Build My Life",
-    slug: "build-my-life",
-    channels: [
-      { name: "Lead Vocal", path: "/musicas/Build My Life/Lead Vocal/audio.mp3", type: "vocal" },
-      { name: "Synth Pad", path: "/musicas/Build My Life/Synth Pad/audio.mp3", type: "keys" },
-      { name: "Electric Guitar", path: "/musicas/Build My Life/Electric Guitar/audio.mp3", type: "guitar" },
-      { name: "Bass", path: "/musicas/Build My Life/Bass/audio.mp3", type: "bass" },
-    ],
-  },
-];
+// Auto-detect all audio files in /public/musicas/
+// Structure: /public/musicas/{Song Name}/{Channel Name}/audio.mp3
+const audioFiles = import.meta.glob('/public/musicas/**/*.(mp3|wav|ogg|flac|m4a|aac)', { eager: false });
+
+function slugify(name: string): string {
+  return name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+function detectType(channelName: string): ChannelConfig['type'] {
+  const lower = channelName.toLowerCase();
+  if (/voz|vocal|voc|lead|canto|coro|backing/i.test(lower)) return 'vocal';
+  if (/piano|keys|teclado|synth|pad|organ|órgão/i.test(lower)) return 'keys';
+  if (/guitar|guitarra|violão|acoustic/i.test(lower)) return 'guitar';
+  if (/drum|bateria|percuss|click/i.test(lower)) return 'drums';
+  if (/bass|baixo|contra/i.test(lower)) return 'bass';
+  return 'other';
+}
+
+function discoverSongs(): SongConfig[] {
+  const songMap = new Map<string, ChannelConfig[]>();
+
+  for (const filePath of Object.keys(audioFiles)) {
+    // filePath looks like: /public/musicas/Song Name/Channel Name/audio.mp3
+    const relative = filePath.replace('/public/musicas/', '');
+    const parts = relative.split('/');
+
+    if (parts.length < 2) continue;
+
+    const songName = parts[0];
+    const channelName = parts.length === 3 ? parts[1] : parts[0];
+    const publicPath = filePath.replace('/public', '');
+
+    if (!songMap.has(songName)) {
+      songMap.set(songName, []);
+    }
+
+    songMap.get(songName)!.push({
+      name: channelName,
+      path: publicPath,
+      type: detectType(channelName),
+    });
+  }
+
+  return Array.from(songMap.entries())
+    .map(([name, channels]) => ({
+      name,
+      slug: slugify(name),
+      channels: channels.sort((a, b) => a.name.localeCompare(b.name)),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+export const songs: SongConfig[] = discoverSongs();
 
 export function getSongBySlug(slug: string): SongConfig | undefined {
   return songs.find((s) => s.slug === slug);
