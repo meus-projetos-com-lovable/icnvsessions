@@ -21,7 +21,7 @@ export function TrackCard({ song, index }: TrackCardProps) {
       <div className="flex-1 min-w-0">
         <h3 className="text-sm font-semibold text-foreground truncate">{song.name}</h3>
         <p className="text-xs text-muted-foreground mt-0.5">
-          {song.channels.length} {song.channels.length === 1 ? 'channel' : 'channels'}
+          {song.channels.length} {song.channels.length === 1 ? 'canal' : 'canais'}
         </p>
       </div>
 

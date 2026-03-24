@@ -15,9 +15,9 @@ export default function SongPage() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <p className="text-foreground font-medium mb-2">Song not found</p>
+          <p className="text-foreground font-medium mb-2">Música não encontrada</p>
           <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            ← Back to library
+            ← Voltar à biblioteca
           </Link>
         </div>
       </div>
