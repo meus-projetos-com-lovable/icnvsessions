@@ -26,41 +26,48 @@ export function TransportControls({
   onSkipBackward,
 }: TransportControlsProps) {
   return (
-    <div className="flex items-center gap-4">
-      <button
-        onClick={onSkipBackward}
-        className="btn-press w-10 h-10 rounded-lg bg-secondary text-secondary-foreground flex items-center justify-center hover:bg-accent transition-colors"
-        title="Skip back 10s"
-      >
-        <SkipBack className="w-4 h-4" />
-      </button>
+    <div className="flex items-center justify-between">
+      {/* Time left */}
+      <span className="font-mono-ui text-xs text-muted-foreground w-12 tabular-nums">
+        {formatTime(currentTime)}
+      </span>
 
-      <button
-        onClick={onTogglePlayPause}
-        disabled={isLoading}
-        className="btn-press w-12 h-12 rounded-xl bg-foreground text-background flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-40"
-        title={isPlaying ? 'Pause' : 'Play'}
-      >
-        {isPlaying ? (
-          <Pause className="w-5 h-5" />
-        ) : (
-          <Play className="w-5 h-5 ml-0.5" />
-        )}
-      </button>
+      {/* Center controls */}
+      <div className="flex items-center gap-6">
+        <button
+          onClick={onSkipBackward}
+          className="btn-press w-12 h-12 rounded-2xl flex items-center justify-center text-foreground active:text-muted-foreground transition-colors"
+          title="Voltar 10s"
+        >
+          <SkipBack className="w-6 h-6" />
+        </button>
 
-      <button
-        onClick={onSkipForward}
-        className="btn-press w-10 h-10 rounded-lg bg-secondary text-secondary-foreground flex items-center justify-center hover:bg-accent transition-colors"
-        title="Skip forward 10s"
-      >
-        <SkipForward className="w-4 h-4" />
-      </button>
+        <button
+          onClick={onTogglePlayPause}
+          disabled={isLoading}
+          className="btn-press w-16 h-16 rounded-full bg-foreground text-background flex items-center justify-center shadow-lg active:shadow-md transition-all disabled:opacity-40"
+          title={isPlaying ? 'Pausar' : 'Reproduzir'}
+        >
+          {isPlaying ? (
+            <Pause className="w-7 h-7" />
+          ) : (
+            <Play className="w-7 h-7 ml-1" />
+          )}
+        </button>
 
-      <div className="flex items-center gap-1.5 ml-2">
-        <span className="font-mono-ui text-xs text-foreground">{formatTime(currentTime)}</span>
-        <span className="text-xs text-muted-foreground">/</span>
-        <span className="font-mono-ui text-xs text-muted-foreground">{formatTime(duration)}</span>
+        <button
+          onClick={onSkipForward}
+          className="btn-press w-12 h-12 rounded-2xl flex items-center justify-center text-foreground active:text-muted-foreground transition-colors"
+          title="Avançar 10s"
+        >
+          <SkipForward className="w-6 h-6" />
+        </button>
       </div>
+
+      {/* Time right */}
+      <span className="font-mono-ui text-xs text-muted-foreground w-12 text-right tabular-nums">
+        {formatTime(duration)}
+      </span>
     </div>
   );
 }
