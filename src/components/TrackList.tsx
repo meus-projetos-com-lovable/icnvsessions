@@ -10,13 +10,12 @@ export function TrackList({ songs }: TrackListProps) {
     return (
       <div className="text-center py-20">
         <p className="text-muted-foreground text-sm">Nenhuma música encontrada.</p>
-        
       </div>
     );
   }
 
   return (
-    <div className="grid gap-2">
+    <div className="grid gap-3">
       {songs.map((song, i) => (
         <TrackCard key={song.slug} song={song} index={i} />
       ))}

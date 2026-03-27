@@ -1,5 +1,6 @@
 import { ChannelStrip } from './ChannelStrip';
 import type { ChannelState } from '@/hooks/useMultiTrackPlayer';
+import { Sliders } from 'lucide-react';
 
 interface MixerProps {
   channels: ChannelState[];
@@ -18,14 +19,15 @@ export function Mixer({ channels, onVolumeChange, onToggleMute, onToggleSolo }: 
   }
 
   return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between px-1 mb-3">
+    <div>
+      <div className="flex items-center gap-2 px-1 mb-4">
+        <Sliders className="w-4 h-4 text-muted-foreground" />
         <h2 className="text-sm font-semibold text-foreground tracking-tight">Mixer</h2>
-        <span className="font-mono-ui text-xs text-muted-foreground">
+        <span className="ml-auto font-mono-ui text-xs text-muted-foreground">
           {channels.length} canais
         </span>
       </div>
-      <div className="space-y-1.5">
+      <div className="space-y-3">
         {channels.map((channel, index) => (
           <ChannelStrip
             key={index}
