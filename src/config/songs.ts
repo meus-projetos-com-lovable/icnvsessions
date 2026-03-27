@@ -44,7 +44,9 @@ function discoverSongs(): SongConfig[] {
     if (parts.length < 2) continue;
 
     const songName = parts[0];
-    const channelName = parts.length === 3 ? parts[1] : parts[0];
+    // Use the audio filename (without extension) as the channel name
+    const fileName = parts[parts.length - 1];
+    const channelName = fileName.replace(/\.(mp3|wav|ogg|flac|m4a|aac)$/i, '');
     const publicPath = filePath.replace('/public', '');
 
     if (!songMap.has(songName)) {
