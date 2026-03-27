@@ -10,7 +10,7 @@ export function TrackList({ songs }: TrackListProps) {
     return (
       <div className="text-center py-20">
         <p className="text-muted-foreground text-sm">Nenhuma música encontrada.</p>
-        <p className="text-muted-foreground text-xs mt-1">Adicione músicas em /public/musicas/ para começar.</p>
+        
       </div>
     );
   }
