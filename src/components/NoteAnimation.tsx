@@ -61,10 +61,10 @@ export function NoteAnimation({ className = '' }: { className?: string }) {
 
     function buildDancePath() {
       const pts: number[][] = [];
-      const N = 300;
+      const N = 180;
       for (let i = 0; i <= N; i++) {
         const f = i / N;
-        const spin = f * Math.PI * 8;
+        const spin = f * Math.PI * 4;
         const drift = f * Math.PI * 3;
         const r = 28 + Math.sin(f * Math.PI * 2.5) * 18 + Math.sin(f * Math.PI * 5) * 8;
         const ox = Math.sin(drift) * 10;
