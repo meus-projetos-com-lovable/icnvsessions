@@ -223,7 +223,7 @@ export function NoteAnimation({ className = '' }: { className?: string }) {
 
       ctx!.save();
       borderPath(bpts);
-      ctx!.strokeStyle = strokeColorAlpha(0.18);
+      ctx!.strokeStyle = strokeColor;
       ctx!.lineWidth = 2;
       ctx!.stroke();
       ctx!.restore();
