@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Music, Disc3 } from 'lucide-react';
+import { NoteAnimation } from './NoteAnimation';
 
 interface LoadingScreenProps {
   onFinished: () => void;
@@ -49,16 +49,10 @@ export function LoadingScreen({ onFinished }: LoadingScreenProps) {
         progress >= 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      {/* Animated disc */}
+      {/* Animated note */}
       <div className="relative mb-8">
-        <div className="absolute inset-0 rounded-full bg-primary/10 blur-2xl scale-150 animate-pulse" />
-        <Disc3
-          className="w-20 h-20 text-primary animate-spin"
-          style={{ animationDuration: '3s' }}
-        />
-        <Music className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-primary-foreground opacity-0 animate-bounce"
-          style={{ animationDelay: '0.5s', animationFillMode: 'forwards', opacity: 1 }}
-        />
+        <div className="absolute inset-0 rounded-full bg-primary/5 blur-3xl scale-150 animate-pulse" />
+        <NoteAnimation />
       </div>
 
       {/* Brand */}
