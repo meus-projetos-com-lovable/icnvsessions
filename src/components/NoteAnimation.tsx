@@ -201,20 +201,29 @@ export function NoteAnimation({ className = '' }: { className?: string }) {
       borderPath(bpts);
       ctx!.clip();
 
-      const danceFrac = 0.52;
+      const danceFrac = 0.30;
+      const noteFrac = 0.55; // note drawing ends here
+      // 0.55-1.0 = hold the completed note visible
       let headIdx: number;
       if (frac < danceFrac) {
         headIdx = Math.floor((frac / danceFrac) * (DANCE.length - 1));
-      } else {
-        const t2 = (frac - danceFrac) / (1 - danceFrac);
+      } else if (frac < noteFrac) {
+        const t2 = (frac - danceFrac) / (noteFrac - danceFrac);
         headIdx = DANCE.length + Math.floor(t2 * (TOTAL - DANCE.length - 1));
+      } else {
+        headIdx = TOTAL - 1;
       }
       headIdx = Math.min(headIdx, TOTAL - 1);
 
       const tailStart = Math.max(0, headIdx - TAIL);
       const tail = FULL.slice(tailStart, headIdx + 1);
 
-      if (frac >= danceFrac) drawNoteSoFar(headIdx);
+      // During hold phase, draw the full note path
+      if (frac >= noteFrac) {
+        drawCurve(FULL.slice(NOTE_START), 2.5, 1);
+      } else if (frac >= danceFrac) {
+        drawNoteSoFar(headIdx);
+      }
       drawTail(tail);
       const head = FULL[headIdx];
       drawDot(head[0], head[1]);
