@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Music, Disc3 } from 'lucide-react';
+import { NoteAnimation } from './NoteAnimation';
 
 interface LoadingScreenProps {
   onFinished: () => void;
