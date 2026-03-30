@@ -75,7 +75,9 @@ function SongPlayer({ song }: { song: NonNullable<ReturnType<typeof getSongBySlu
       {/* Mixer channels — scrollable area */}
       <main className="flex-1 overflow-y-auto overscroll-contain">
         <div className="max-w-lg mx-auto px-5 py-5 pb-48 sm:pb-40">
-          <Mixer
+          <SpectrumAnalyzer analyser={analyser} isPlaying={isPlaying} />
+          <div className="mt-4">
+            <Mixer
             channels={channelStates}
             onVolumeChange={setVolume}
             onToggleMute={toggleMute}
