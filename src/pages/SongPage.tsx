@@ -83,6 +83,7 @@ function SongPlayer({ song }: { song: NonNullable<ReturnType<typeof getSongBySlu
             onToggleMute={toggleMute}
             onToggleSolo={toggleSolo}
           />
+          </div>
         </div>
       </main>
 
