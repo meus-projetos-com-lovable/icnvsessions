@@ -35,6 +35,7 @@ function SongPlayer({ song }: { song: NonNullable<ReturnType<typeof getSongBySlu
     currentTime,
     duration,
     channelStates,
+    analyser,
     togglePlayPause,
     seek,
     skipForward,
