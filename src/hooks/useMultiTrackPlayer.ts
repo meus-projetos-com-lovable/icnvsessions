@@ -29,6 +29,7 @@ export function useMultiTrackPlayer(channels: ChannelConfig[]) {
   const offsetRef = useRef(0);
   const animFrameRef = useRef<number>(0);
   const channelsKeyRef = useRef('');
+  const analyserRef = useRef<AnalyserNode | null>(null);
 
   // Load saved volumes from localStorage
   const getSavedVolumes = useCallback((channelNames: string[]) => {
@@ -87,9 +88,16 @@ export function useMultiTrackPlayer(channels: ChannelConfig[]) {
     setChannelStates(initialStates);
     setIsLoading(true);
 
+    // Create a master analyser node
+    const analyser = ctx.createAnalyser();
+    analyser.fftSize = 256;
+    analyser.smoothingTimeConstant = 0.8;
+    analyser.connect(ctx.destination);
+    analyserRef.current = analyser;
+
     const nodes: AudioNode[] = channels.map(() => {
       const gainNode = ctx.createGain();
-      gainNode.connect(ctx.destination);
+      gainNode.connect(analyser);
       return { source: null, gainNode, buffer: null };
     });
     audioNodesRef.current = nodes;
@@ -269,6 +277,7 @@ export function useMultiTrackPlayer(channels: ChannelConfig[]) {
     currentTime,
     duration,
     channelStates,
+    analyser: analyserRef.current,
     togglePlayPause,
     seek,
     skipForward,

@@ -6,6 +6,7 @@ import { useMultiTrackPlayer } from '@/hooks/useMultiTrackPlayer';
 import { Mixer } from '@/components/Mixer';
 import { TransportControls } from '@/components/TransportControls';
 import { ProgressBar } from '@/components/ProgressBar';
+import { SpectrumAnalyzer } from '@/components/SpectrumAnalyzer';
 
 export default function SongPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -34,6 +35,7 @@ function SongPlayer({ song }: { song: NonNullable<ReturnType<typeof getSongBySlu
     currentTime,
     duration,
     channelStates,
+    analyser,
     togglePlayPause,
     seek,
     skipForward,
@@ -73,12 +75,15 @@ function SongPlayer({ song }: { song: NonNullable<ReturnType<typeof getSongBySlu
       {/* Mixer channels — scrollable area */}
       <main className="flex-1 overflow-y-auto overscroll-contain">
         <div className="max-w-lg mx-auto px-5 py-5 pb-48 sm:pb-40">
-          <Mixer
+          <SpectrumAnalyzer analyser={analyser} isPlaying={isPlaying} />
+          <div className="mt-4">
+            <Mixer
             channels={channelStates}
             onVolumeChange={setVolume}
             onToggleMute={toggleMute}
             onToggleSolo={toggleSolo}
           />
+          </div>
         </div>
       </main>
 
