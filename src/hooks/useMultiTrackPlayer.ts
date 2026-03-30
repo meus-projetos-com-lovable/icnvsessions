@@ -29,6 +29,7 @@ export function useMultiTrackPlayer(channels: ChannelConfig[]) {
   const offsetRef = useRef(0);
   const animFrameRef = useRef<number>(0);
   const channelsKeyRef = useRef('');
+  const analyserRef = useRef<AnalyserNode | null>(null);
 
   // Load saved volumes from localStorage
   const getSavedVolumes = useCallback((channelNames: string[]) => {
