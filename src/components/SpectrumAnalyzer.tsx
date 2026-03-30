@@ -11,7 +11,7 @@ const BAR_GAP = 2;
 export function SpectrumAnalyzer({ analyser, isPlaying }: SpectrumAnalyzerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
-  const dataRef = useRef<Uint8Array | null>(null);
+  const dataRef = useRef<Uint8Array<ArrayBuffer> | null>(null);
 
   const draw = useCallback(() => {
     const canvas = canvasRef.current;
