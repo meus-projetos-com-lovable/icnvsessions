@@ -277,6 +277,7 @@ export function useMultiTrackPlayer(channels: ChannelConfig[]) {
     currentTime,
     duration,
     channelStates,
+    analyser: analyserRef.current,
     togglePlayPause,
     seek,
     skipForward,
