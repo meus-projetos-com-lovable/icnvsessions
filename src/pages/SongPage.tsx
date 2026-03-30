@@ -6,6 +6,7 @@ import { useMultiTrackPlayer } from '@/hooks/useMultiTrackPlayer';
 import { Mixer } from '@/components/Mixer';
 import { TransportControls } from '@/components/TransportControls';
 import { ProgressBar } from '@/components/ProgressBar';
+import { SpectrumAnalyzer } from '@/components/SpectrumAnalyzer';
 
 export default function SongPage() {
   const { slug } = useParams<{ slug: string }>();
