@@ -193,10 +193,13 @@ export function useMultiTrackPlayer(channels: ChannelConfig[]) {
     offsetRef.current = offset;
   }, []);
 
-  const play = useCallback(() => {
+  const play = useCallback(async () => {
     const ctx = audioContextRef.current;
     if (!ctx) return;
-    if (ctx.state === 'suspended') ctx.resume();
+    // iOS Safari requires resume() to be awaited inside a user gesture
+    if (ctx.state === 'suspended') {
+      try { await ctx.resume(); } catch {}
+    }
     startPlayback(offsetRef.current);
     setIsPlaying(true);
     applyGains(channelStates);
