@@ -200,6 +200,14 @@ export function useMultiTrackPlayer(channels: ChannelConfig[]) {
     if (ctx.state === 'suspended') {
       try { await ctx.resume(); } catch {}
     }
+    // iOS unlock: play a silent buffer synchronously to fully unlock audio
+    try {
+      const unlockBuf = ctx.createBuffer(1, 1, 22050);
+      const unlockSrc = ctx.createBufferSource();
+      unlockSrc.buffer = unlockBuf;
+      unlockSrc.connect(ctx.destination);
+      unlockSrc.start(0);
+    } catch {}
     startPlayback(offsetRef.current);
     setIsPlaying(true);
     applyGains(channelStates);
